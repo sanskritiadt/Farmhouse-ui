@@ -1,0 +1,1 @@
+export const POST_FAKE_REGISTER = "/auth/signup";

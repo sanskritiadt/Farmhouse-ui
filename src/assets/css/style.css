@@ -1,0 +1,335 @@
+body {
+  font-family: "Nunito", sans-serif;
+}
+.farm-nav img {
+  width: 170px;
+}
+
+.farm-nav ul li a:hover {
+  color: #422aca;
+}
+
+.farm-hover  ul li a:hover{
+  color: #2aca6a;
+}
+.farm-nav ul li a {
+  font-size: 17px;
+  font-weight: 400;
+}
+.home-bg {
+  background-image: url(../Images/homebackgroung.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.Nearby h1 {
+  font-size: 42px;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+}
+.Nearby h1 span {
+  color: #2aca6a;
+}
+nav ul{
+  gap: 30px;
+}
+
+.nav-bottom{
+  padding-bottom: 20px;
+}             .Login-btn{
+  font-size: 16px;
+  border-radius: 25px;
+  background: #2aca6a;
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  color: #fff;
+  margin: 0 5px;
+  min-width: 120px;
+  text-align: center;
+  position: relative;
+  line-height: 26px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  margin-left: 220px;
+}
+
+.Login-btn:hover{
+  -webkit-transition: all .5s ease 0;
+  transition: all .5s ease 0;
+  transition: all .5s ease 0s;
+  color:#2bca6a;
+    background-color:#FFF;
+    border-color: #2aca6a;
+}
+
+.section-padding {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.Nearby h4 {
+  font-size: 22px;
+  font-weight: 400;
+  color: #ccc;
+  line-height: 32px;
+  text-align: center;
+}
+.aboutus :hover{
+  color: greenyellow;
+}
+.bg-area {
+  background: rgba(48, 48, 48, 0.9);
+}
+.Browse {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  margin: 10px 0 20px;
+}
+.cart a {
+  background: rgba(255, 255, 255, 0.07);
+  position: relative;
+  /* width: 200px;
+    height: 105px; */
+  display: block;
+  overflow: hidden;
+  color: #fff;
+  border-radius: 6px;
+  padding: 7px;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+.cart {
+  text-align: center;
+}
+.house-icons {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding-top: 16px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 0 16px 0 rgba(2, 2, 2, 0.1);
+  -webkit-box-shadow: 0 0 16px 0 rgba(2, 2, 2, 0.1);
+}
+.house-icons {
+  font-size: 26px;
+}
+.cart a {
+  text-decoration: none;
+}
+.cart:hover {
+  background-color: #2aca6a;
+}
+.check-out {
+  background-color: #fff;
+  border-radius: 40px;
+  padding: 0px 20px;
+}
+.clone-button {
+  background-color: #e6e6e6;
+  margin-top: 5px;
+  padding: 3px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+.check-out input {
+  border: none;
+  width: 100%;
+}
+.check-out select {
+  border: none;
+  appearance: none;
+}
+
+.utf_listing_item-container {
+  margin-bottom: 25px;
+  margin-left: 30px;
+  padding: 5px;
+  background: #fff;
+  box-shadow: 0 6px 7px 0 rgba(0,0,0,.07);
+  border: 1px solid rgba(0,0,0,.05);
+  border-radius: 25px;
+}
+.check-out:focus-visible {
+  /* outline-offset: none; */
+  outline: none;
+}
+.need-place {
+  margin-top: 50px;
+}
+.Most-Recommended h3 {
+  text-align: center;
+}
+.Most-Recommended h3 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+.villa-card {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1);
+  background: #fff;
+  position: relative;
+}
+.villa-card img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.villa-card-body h5 {
+  color: #6d6d6d;
+  font-size: 18px;
+  font-weight: 600;
+}
+.Most-Recommended a {
+  text-decoration: none;
+}
+.villa-card-body {
+  padding: 8px;
+}
+.rating {
+  font-family: open sans;
+  font-size: 11px;
+  background: #54ba1d;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+}
+.rating i {
+  margin: 0 3px;
+}
+.location i {
+  color: #2aca6a;
+}
+.location span {
+  color: #ababab;
+  margin-left: 3px;
+}
+.price span {
+  margin: 0 3px;
+}
+.pay-price {
+  color: #2bca6a;
+  font-weight: 600;
+  font-size: 19px;
+}
+.show-price {
+  color: #ababab;
+}
+.discount {
+  color: red;
+  font-size: 12px;
+  font-weight: 600;
+}
+.heart i {
+  color: #ababab;
+}
+.heart i:hover {
+  color: #54ba1d;
+}
+.poji {
+  position: absolute;
+  right: 2px;
+  background-color: #2aca6a;
+}
+.main_input_search_part{
+  margin-top: 50px;
+  border-radius: 50px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.12);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 6px;
+  border: 3px solid rgba(0,0,0,.12);
+  max-height: 70px;
+}
+
+.searchbutton{
+  width: 100%;
+ background-color: #2aca6a;
+ top: 0;
+ padding: 10px 20px;
+ color: #fff;
+ position: relative;
+ font-size: 20px;
+ font-weight: 600;
+ display: inline-block;
+ transition: all .2s ease-in-out;
+ cursor: pointer;
+ margin-left: 20px;
+ overflow: hidden;
+ border: none;
+ border-radius: 30px;
+
+}
+.searchbutton:hover{
+  color: white;
+  background-color: #30eb7b;
+}
+.input_label{ background: white;
+  border: none;
+  padding: 0 20px;
+  font-size: 15px;
+  padding: 0 15px;
+  height: 18px;
+  color: rgb(51, 51, 51);
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+ }
+ 
+.poji{
+  top: 8px;
+  left: auto;
+  right: -8px;
+  bottom: auto;
+  border-radius: 0;
+  padding: 2px 5px;
+  font-size: 9px;
+  transform: none;
+  -webkit-transform: none;
+  display: block;
+  position: absolute;
+  z-index: 5;
+  line-height: 15px;
+  text-transform: uppercase;
+  background-color: #2aca6a;
+  border: 1px solid #2aca6a;
+  color: #fff;
+  font-weight: 700;
+}
+
+
+
+
+
+.productDetail-card {
+  padding: 20px 25px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1);
+  background: #f9f9f9;
+  position: relative;
+  line-height: 2;
+}
+
+.Product-title{
+  font-size: 26px;
+  line-height: 36px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #323232;
+}
+
+.yellow-star {
+  color: rgb(219, 200, 25); /* Change to your preferred pale yellow color */
+  margin-right: 5px; /* Adjust the margin as needed for spacing */
+}
