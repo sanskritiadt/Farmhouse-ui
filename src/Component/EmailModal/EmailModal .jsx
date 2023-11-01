@@ -25,8 +25,11 @@ const EmailModal = ({ show, onHide, onBookNow }) => {
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success" onClick={handleBookNow}>
-          Register
+        <Button variant="secondary" onClick={onHide}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleBookNow}>
+          Book Now
         </Button>
       </Modal.Footer>
     </Modal>

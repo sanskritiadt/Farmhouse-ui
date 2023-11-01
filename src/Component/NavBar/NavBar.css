@@ -1,0 +1,54 @@
+body {
+    font-family: "Nunito", sans-serif;
+  }
+
+
+.farm-nav img {
+  width: 170px;
+}
+
+.farm-nav ul li a:hover {
+  color: #422aca;
+}
+
+.farm-hover  ul li a:hover{
+  color: #2aca6a;
+}
+.farm-nav ul li a {
+  font-size: 17px;
+  font-weight: 400;
+}
+
+nav ul{
+  gap: 30px;
+}
+
+.nav-bottom{
+  padding-bottom: 20px;
+}            
+ .Login-btn{
+  font-size: 16px;
+  border-radius: 25px;
+  background: #2aca6a;
+  padding: 10px 20px;
+  border: 1px solid transparent;
+  color: #fff;
+  margin: 0 5px;
+  min-width: 120px;
+  text-align: center;
+  position: relative;
+  line-height: 26px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  margin-left: 220px;
+}
+
+.Login-btn:hover{
+  -webkit-transition: all .5s ease 0;
+  transition: all .5s ease 0;
+  transition: all .5s ease 0s;
+  color:#2bca6a;
+    background-color:#FFF;
+    border-color: #2aca6a;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import '../../assets/css/style.css'
+
 const PropertyCard = ({ name, address, price }) => {
     return (
 <div className="card float-right  my-5 col-xl-6 utf_listing_item-container" >

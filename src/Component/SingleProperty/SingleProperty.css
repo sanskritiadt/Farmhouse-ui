@@ -1,0 +1,26 @@
+body {
+    font-family: "Nunito", sans-serif;
+  }
+  
+.productDetail-card {
+  padding: 20px 25px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1);
+  background: #f9f9f9;
+  position: relative;
+  line-height: 2;
+}
+
+.Product-title{
+  font-size: 26px;
+  line-height: 36px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #323232;
+}
+
+.yellow-star {
+  color: rgb(219, 200, 25);
+  margin-right: 5px;
+}

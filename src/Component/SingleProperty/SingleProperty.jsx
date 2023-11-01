@@ -5,9 +5,10 @@ import villa1 from "../../assets/Images/villa1.jpg";
 import villa2 from "../../assets/Images/villa2.jpg";
 import villa3 from "../../assets/Images/villa3.jpg";
 import { toast } from 'react-toastify';
+import './SingleProperty.css';
+import PricingForm from "../pricing summary panel/pricingForm";
 import {HiOutlineLocationMarker} from 'react-icons/hi';
 import {FaUserAlt,FaMap} from 'react-icons/fa'
-
 
 const SingleProperty = () => {
   const { id } = useParams();
@@ -63,12 +64,13 @@ const SingleProperty = () => {
     }).catch((error) => {
       console.log(error);
       toast.error("Error occured try after sometime.", { position: "top-center", theme: 'colored' })
+
     })
   }
 
   return (
     <>
-      <div className="container ">
+      <div className="container  ">
         <div className="row mb-5">
           <div className="col-lg-12">
             <div
@@ -202,7 +204,7 @@ const SingleProperty = () => {
                 <div className="col-lg-12">
                   <div className="location">
                     {/* <i className="fa fa-user" aria-hidden="true"></i> */}
-                    <FaUserAlt/>
+                    <FaUserAlt/> 
                     <span>{Villa.maxOccupancy} </span>
                   </div>
                 </div>
@@ -248,80 +250,7 @@ const SingleProperty = () => {
           </div>
           {/* ----------------------------------------------------------------------------------------------------- Pricing Summary panel----------------------------- */}
 
-          <div className=" productDetail-card col-lg-4 col-md-5 margin-top-25 ">
-            <i className="fa fa-inr" aria-hidden="true"></i>
-            <span className="property-discount payable_amt" style={{ fontWeight: "bolder", fontSize: '18px' }}>{Villa.price}.00/-</span>
-            <span style={{ fontSize: '12px' }}>&nbsp; &nbsp;(Inclusive of all charges)</span>
-            <hr className="m-t-sm m-b-lg" />
-            <form>
-              <div className="with-forms margin-top-0">
-                <div className="row with-forms">
-                  <div className="col-md-12">
-                    <div className="form-group">
-                      <div className="input-group date" id="datetimepicker6">
-                        <label htmlFor="inputCheckin" className="col-md-4 col-form-label">Check-In:</label>
-                        <input type="date" onChange={(e) => { handle(e) }} value={data.checkInDate}
-                          className="form-control"
-                          id="checkInDate" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-12 mt-3">
-                    <div className="form-group">
-                      <div className="input-group date" id="datetimepicker7">
-                        <label htmlFor="inputCheckin" className="col-md-4 col-form-label" name='checkOutDate'>Check-Out:</label>
-                        <input type="date" className="form-control" onChange={(e) => { handle(e) }} value={data.checkOutDate}
-                          id="checkOutDate"
-                        />
-
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-12 mt-3">
-                    <div className="form-group">
-                      <div className="input-group date" id="datetimepicker7">
-                        <label htmlFor="inputCheckin" className="col-md-4 col-form-label" name='noofguest'>No. of Guest:</label>
-                        <input type="number" onChange={(e) => { handle(e) }} value={data.guestNo} id="guestNo"
-                          className="form-control" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-12 mt-3">
-                    <div className="form-group">
-                      <div className="input-group date" id="datetimepicker7">
-                        <label htmlFor="inputCheckin" className="col-md-4 col-form-label" name='checkOutDate'>Email:</label>
-                        <input type="email" className="form-control" onChange={(e) => { handle(e) }} value={data.email}
-                          id="email"
-                        />
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="row with-forms">
-                  <div className="col-lg-12 col-md-12">
-                    <hr className="v-divider theme--light m-b-sm" />
-                  </div>
-                </div>
-                <div className="row with-forms m-t-xl mb-3">
-                  <div className="col-lg-12 col-md-12 form-group">
-                    <div className="checkboxes">
-                      <input type="checkbox" />
-                      <label style={{ marginLeft: '10px' }}>
-                        I, agree to Farmhouse Terms &amp; Conditions
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="d-grid gap-2 col-4 mx-auto btn-group btn-group-sm">
-                <button className="btn btn-outline-success" onClick={submit} type="button">Book now</button>
-              </div>
-            </form>
-            <div>
-            </div>
-          </div>
-
+      <PricingForm/>
         </div>
 
       </div>

@@ -1,26 +1,13 @@
 body {
   font-family: "Nunito", sans-serif;
 }
-.farm-nav img {
-  width: 170px;
-}
 
-.farm-nav ul li a:hover {
-  color: #422aca;
-}
-
-.farm-hover  ul li a:hover{
-  color: #2aca6a;
-}
-.farm-nav ul li a {
-  font-size: 17px;
-  font-weight: 400;
-}
 .home-bg {
-  background-image: url(../Images/homebackgroung.jpg);
+  background-image: url('../../assets/Images/homebackgroung.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .Nearby h1 {
   font-size: 42px;
   color: #fff;
@@ -29,38 +16,6 @@ body {
 }
 .Nearby h1 span {
   color: #2aca6a;
-}
-nav ul{
-  gap: 30px;
-}
-
-.nav-bottom{
-  padding-bottom: 20px;
-}             .Login-btn{
-  font-size: 16px;
-  border-radius: 25px;
-  background: #2aca6a;
-  padding: 10px 20px;
-  border: 1px solid transparent;
-  color: #fff;
-  margin: 0 5px;
-  min-width: 120px;
-  text-align: center;
-  position: relative;
-  line-height: 26px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  margin-left: 220px;
-}
-
-.Login-btn:hover{
-  -webkit-transition: all .5s ease 0;
-  transition: all .5s ease 0;
-  transition: all .5s ease 0s;
-  color:#2bca6a;
-    background-color:#FFF;
-    border-color: #2aca6a;
 }
 
 .section-padding {
@@ -79,19 +34,23 @@ nav ul{
 }
 .bg-area {
   background: rgba(48, 48, 48, 0.9);
-}
+} 
+
+
+
 .Browse {
   font-size: 20px;
   font-weight: 500;
   color: #fff;
   text-align: center;
   margin: 10px 0 20px;
-}
+} 
+
+ 
 .cart a {
   background: rgba(255, 255, 255, 0.07);
   position: relative;
-  /* width: 200px;
-    height: 105px; */
+
   display: block;
   overflow: hidden;
   color: #fff;
@@ -123,8 +82,9 @@ nav ul{
 }
 .cart:hover {
   background-color: #2aca6a;
-}
-.check-out {
+} 
+
+ .check-out {
   background-color: #fff;
   border-radius: 40px;
   padding: 0px 20px;
@@ -143,9 +103,9 @@ nav ul{
 .check-out select {
   border: none;
   appearance: none;
-}
+} 
 
-.utf_listing_item-container {
+ .utf_listing_item-container {
   margin-bottom: 25px;
   margin-left: 30px;
   padding: 5px;
@@ -153,22 +113,24 @@ nav ul{
   box-shadow: 0 6px 7px 0 rgba(0,0,0,.07);
   border: 1px solid rgba(0,0,0,.05);
   border-radius: 25px;
-}
-.check-out:focus-visible {
-  /* outline-offset: none; */
+} 
+
+ .check-out:focus-visible {
+
   outline: none;
-}
-.need-place {
+} 
+
+  .need-place {
   margin-top: 50px;
 }
-.Most-Recommended h3 {
-  text-align: center;
-}
+
 .Most-Recommended h3 {
   text-align: center;
   font-size: 30px;
   font-weight: 600;
-}
+}  
+
+
 .villa-card {
   border: 1px solid #eee;
   border-radius: 10px;
@@ -305,31 +267,4 @@ nav ul{
   border: 1px solid #2aca6a;
   color: #fff;
   font-weight: 700;
-}
-
-
-
-
-
-.productDetail-card {
-  padding: 20px 25px;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1);
-  background: #f9f9f9;
-  position: relative;
-  line-height: 2;
-}
-
-.Product-title{
-  font-size: 26px;
-  line-height: 36px;
-  font-weight: 500;
-  margin-bottom: 5px;
-  color: #323232;
-}
-
-.yellow-star {
-  color: rgb(219, 200, 25); /* Change to your preferred pale yellow color */
-  margin-right: 5px; /* Adjust the margin as needed for spacing */
 }

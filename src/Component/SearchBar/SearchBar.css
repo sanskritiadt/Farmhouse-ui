@@ -1,0 +1,14 @@
+/* Style for displaying validation errors in red and with a smaller font */
+.error {
+    color: red;
+    font-size: 0.875rem; /* Adjust the font size as needed */
+    margin-top: 0.25rem; /* Optional margin for better spacing */
+  }
+  
+  /* Style for adding a red border to invalid fields */
+  .form-control.is-invalid {
+    border-color: red;
+  }
+  
+  /* Optional: If you want to change the border color for invalid fields, you can add more styling here */
+  

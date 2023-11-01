@@ -1,4 +1,4 @@
-import "../../assets/css/style.css";
+import './NavBar.css';
 import {useState} from 'react'
 import  logo from "../../assets/Images/farmly.PNG"
 import { Link } from "react-router-dom"
