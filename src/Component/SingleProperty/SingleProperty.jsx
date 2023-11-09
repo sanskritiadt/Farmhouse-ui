@@ -1,76 +1,45 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import villa1 from "../../assets/Images/villa1.jpg";
 import villa2 from "../../assets/Images/villa2.jpg";
 import villa3 from "../../assets/Images/villa3.jpg";
 import { toast } from 'react-toastify';
+import { fetchAmenitiesData, fetchSingleProperty } from "../../utils/api";
 import './SingleProperty.css';
 import PricingForm from "../pricing summary panel/pricingForm";
-import {HiOutlineLocationMarker} from 'react-icons/hi';
-import {FaUserAlt,FaMap} from 'react-icons/fa'
+import { HiOutlineLocationMarker } from 'react-icons/hi';
+import { FaUserAlt, FaMap } from 'react-icons/fa'
 
 const SingleProperty = () => {
   const { id } = useParams();
   const [Villa, setVilla] = useState({});
   const [Amenities, setAmenities] = useState(null);
-  
-  const [data, setData] = useState({
-    email: "",
-    checkInDate: "",
-    checkOutDate: "",
-    guestNo: "",
-  });
 
   useEffect(() => {
-    axios
-      .get(`/alpha-homes/property/getPropertyDetailsById/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        setVilla(response.data);
-      })
-      .catch((error) => {
+    async function fetchData() {
+      try {
+        const singleProperty = await fetchSingleProperty(id);
+        setVilla(singleProperty);
+      } catch (error) {
         console.log(error);
-      });
-    axios
-      .get(`/alpha-homes/property/getAmenitiesDetails/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        setAmenities(response.data);
-      })
-      .catch((error) => {
+        toast.error('Error occured in fetching property, try after some time.');
+
+      } try {
+        const amenitiesData = await fetchAmenitiesData(id);
+        setAmenities(amenitiesData);
+      } catch (error) {
         console.log(error);
-      });
+      }
+    }
+    fetchData()
   }, [id]);
 
-  function handle(e) {
-    const newdata = { ...data };
-    newdata[e.target.id] = e.target.value;
-    setData(newdata);
-    console.log(newdata);
-  }
-  function submit(e) {
-    e.preventDefault();
-    axios.post(`/alpha-homes/booking/createBooking`, {
-      email: data.email,
-      propertyId: Villa.propertyId,
-      checkInDate: data.checkInDate,
-      checkOutDate: data.checkOutDate,
-      guestNo: parseInt(data.guestNo),
-      totalPrice: Villa.price,
-    }).then((response) => {
-      console.log(response.data)
-      toast.success(response.data, { position: 'top-center', theme: "colored" })
-    }).catch((error) => {
-      console.log(error);
-      toast.error("Error occured try after sometime.", { position: "top-center", theme: 'colored' })
 
-    })
-  }
+
 
   return (
     <>
-      <div className="container  ">
+      <div className="container">
         <div className="row mb-5">
           <div className="col-lg-12">
             <div
@@ -197,14 +166,14 @@ const SingleProperty = () => {
                 <div className="col-lg-12">
                   <div className="location">
                     {/* <i className="fa fa-map-marker" aria-hidden="true"></i> */}
-                    <HiOutlineLocationMarker/>
+                    <HiOutlineLocationMarker />
                     <span>{Villa.address}.</span>
                   </div>
                 </div>
                 <div className="col-lg-12">
                   <div className="location">
                     {/* <i className="fa fa-user" aria-hidden="true"></i> */}
-                    <FaUserAlt/> 
+                    <FaUserAlt />
                     <span>{Villa.maxOccupancy} </span>
                   </div>
                 </div>
@@ -213,7 +182,7 @@ const SingleProperty = () => {
                   <div className="col-lg-10">
                     <div className="location">
                       {/* <i className="fa fa-map" aria-hidden="true"></i> */}
-                      <FaMap/>
+                      <FaMap />
                       <span>800Sq.Yard</span>
                     </div>
                   </div>
@@ -233,24 +202,24 @@ const SingleProperty = () => {
             </div>
             <div className="container pt-5">
               <div className="row">
-                  {Amenities ? (
-                    <div>
-                      <ul>
-                        <h4>Amenities:</h4>
-                        {Amenities.amenities.map((amenity, index) => (
-                          <li key={index}>{amenity}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : (
-                    <p>Loading...</p>
-                  )}
+                {Amenities ? (
+                  <div>
+                    <ul>
+                      <h5>Amenities:</h5>
+                      {Amenities.amenities.map((amenity, index) => (
+                        <li key={index}>{amenity}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </div>
             </div>
           </div>
           {/* ----------------------------------------------------------------------------------------------------- Pricing Summary panel----------------------------- */}
 
-      <PricingForm/>
+          <PricingForm />
         </div>
 
       </div>

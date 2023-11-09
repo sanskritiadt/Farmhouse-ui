@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { fetchSingleProperty } from '../../utils/api'
 import * as Yup from 'yup';
 
 export default function PricingForm() {
@@ -11,15 +12,15 @@ export default function PricingForm() {
   const currentDate = new Date().toISOString().split('T')[0];
 
   useEffect(() => {
-    axios
-      .get(`/alpha-homes/property/getPropertyDetailsById/${id}`)
-      .then((response) => {
-        setVilla(response.data);
-      })
-      .catch((error) => {
+    async function fetchData() {
+      try {
+        const singleProperty = await fetchSingleProperty(id);
+        setVilla(singleProperty);
+      } catch (error) {
         console.log(error);
-      });
-
+      }
+    }
+    fetchData();
   }, [id]);
 
   function submit(values, actions) {
@@ -51,16 +52,36 @@ export default function PricingForm() {
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email address')
-      .required('*'),
-    checkInDate: Yup.date().required('*'),
-    checkOutDate: Yup.date().required('*'),
+      .required('Email is required'),
+    checkInDate: Yup.date()
+      .required('Check-in date is required.')
+      .test('checkInBeforeCheckOut', 'Check-in date must be before the check-out date',
+        function (checkInDate) {
+          // `this.parent` refers to the entire form values.
+          const { checkOutDate } = this.parent;
+          if (checkInDate && checkOutDate) {
+            return new Date(checkInDate) < new Date(checkOutDate);
+          }
+          return true; // If either date is missing, assume it's valid.
+        }),
+    checkOutDate: Yup.date()
+      .required('Check-out date is required.')
+      .test('checkInBeforeCheckOut', 'Check-out date must be after the check-in date',
+        function (checkOutDate) {
+          // `this.parent` refers to the entire form values.
+          const { checkInDate } = this.parent;
+          if (checkInDate && checkOutDate) {
+            return new Date(checkOutDate) > new Date(checkInDate);
+          }
+          return true; // If either date is missing, assume it's valid.
+        }),
     guestNo: Yup.number()
-      .typeError('*')
+      .typeError('Number of Guests must be a number')
       .positive('Number of Guests must be a positive number')
-      .required('*'),
-    termsAndConditions: Yup.boolean()
-      .oneOf([true], 'You must agree to the terms and conditions'),
+      .required('Number of Guests is required'),
+    termsAndConditions: Yup.boolean().oneOf([true], 'You must agree to the terms and conditions'),
   });
+
 
   return (
     <div className="productDetail-card col-lg-4 col-md-5 margin-top-25">
@@ -83,7 +104,7 @@ export default function PricingForm() {
         validationSchema={validationSchema}
         onSubmit={submit}
       >
-        {({ isSubmitting,errors}) => (
+        {({ isSubmitting }) => (
           <Form>
             <div className="with-forms margin-top-0">
               <div className="row with-forms">
@@ -91,44 +112,44 @@ export default function PricingForm() {
                   <div className="form-group">
                     <div className="input-group date" id="datetimepicker6">
                       <label htmlFor="checkInDate" className="col-md-4 col-form-label">
-                        Check-In:{errors.checkInDate && <span className="text-danger">*</span>}
+                        Check-In:
                       </label>
-                      <Field type="date" name="checkInDate" className="form-control"  min={currentDate}/>
-              
+                      <Field type="date" name="checkInDate" className="form-control" min={currentDate} />
                     </div>
+                    <ErrorMessage name="checkInDate" component="div" className="error" />
                   </div>
                 </div>
                 <div className="col-md-12 mt-3">
                   <div className="form-group">
                     <div className="input-group date" id="datetimepicker7">
                       <label htmlFor="checkOutDate" className="col-md-4 col-form-label">
-                        Check-Out:{errors.checkInDate && <span className="text-danger">*</span>}
+                        Check-Out:
                       </label>
                       <Field type="date" name="checkOutDate" className="form-control" min={currentDate} />
-       
                     </div>
+                    <ErrorMessage name="checkOutDate" component="div" className="error" />
                   </div>
                 </div>
                 <div className="col-md-12 mt-3">
                   <div className="form-group">
                     <div className="input-group date" id="datetimepicker7">
                       <label htmlFor="guestNo" className="col-md-4 col-form-label">
-                        No. of Guest:{errors.checkInDate && <span className="text-danger">*</span>}
+                        No. of Guest:
                       </label>
-                      <Field type="number" name="guestNo" className="form-control" />
-           
+                      <Field type="number" name="guestNo" min='1' step='1' className="form-control" />
                     </div>
+                    <ErrorMessage name="guestNo" component="div" className="error" />
                   </div>
                 </div>
                 <div className="col-md-12 mt-3">
                   <div className="form-group">
                     <div className="input-group date" id="datetimepicker7">
                       <label htmlFor="email" className="col-md-4 col-form-label">
-                        Email:{errors.checkInDate && <span className="text-danger">*</span>}
+                        Email:
                       </label>
                       <Field type="email" name="email" className="form-control" />
-                 
                     </div>
+                    <ErrorMessage name="email" component="div" className="error" />
                   </div>
                 </div>
               </div>
@@ -156,6 +177,7 @@ export default function PricingForm() {
           </Form>
         )}
       </Formik>
+
     </div>
   );
 }
