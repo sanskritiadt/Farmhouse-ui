@@ -4,7 +4,7 @@ import { AiTwotoneHome } from "react-icons/ai";
 import { HiHomeModern } from "react-icons/hi2";
 import { MdApartment } from "react-icons/md";
 import { MdOutlineHouse } from "react-icons/md";
-import SearchBar from  '../SearchBar/SearchBar.js';
+import SearchBar from  '../SearchBar/SearchBar.jsx';
 
 export default function Home() {
 

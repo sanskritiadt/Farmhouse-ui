@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
+import { fetchPropertyDetails } from '../../utils/api'
 import { Link } from 'react-router-dom';
 import PropertyCard from '../PropertyCard/PropertyCard'
 
@@ -7,14 +7,15 @@ const PropertyList = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    axios.get('/alpha-homes/property/allPropertyDetails')
-      .then((response) => {
-        console.log(response.data);
-       
-        setList(response.data);
-      }).catch((error) => {
+    async function fetchData() {
+      try {
+        const data = await fetchPropertyDetails();
+        setList(data);
+      } catch (error) {
         console.log(error)
-      })
+      }
+    }
+    fetchData()
   }, [])
 
   return (

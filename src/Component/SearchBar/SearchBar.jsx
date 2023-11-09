@@ -2,18 +2,35 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './SearchBar.css';
+import { Link } from 'react-router-dom';
 
 const validationSchema = Yup.object().shape({
-  checkinDate: Yup.date().required('Check-In Date is required'),
-  checkoutDate: Yup.date().required('Check-Out Date is required'),
+  checkinDate: Yup.date().required('Check-In Date is required')
+    .test('checkInBeforeCheckout', 'Check-in date must be before the check-out date',
+      function (checkinDate) {
+        const { checkoutDate } = this.parent;
+        if (checkinDate && checkoutDate) {
+          return new Date(checkinDate) < new Date(checkoutDate);
+        }
+        return true;
+      }),
+  checkoutDate: Yup.date().required('Check-Out Date is required')
+    .test('checkInBeforeCheckout', 'Check-out date must be after the check-in date',
+      function (checkoutDate) {
+        const { checkinDate } = this.parent;
+        if (checkinDate && checkoutDate) {
+          return new Date(checkoutDate) > new Date(checkinDate);
+        } return true;
+      }),
   guestCount: Yup.number()
     .typeError('Number of Guests must be a number')
     .positive('Number of Guests must be a positive number')
     .required('Number of Guests is required'),
 });
 
-function SearchBar() {
 
+
+function SearchBar() {
   const currentDate = new Date().toISOString().split('T')[0];
 
   return (
@@ -78,7 +95,7 @@ function SearchBar() {
                 <Field
                   type="number"
                   className="form-control"
-                  id="guestCount"
+                  id="guestCount" min='1' step='1'
                   name="guestCount"
                   placeholder="No of Guests"
                 />
@@ -86,13 +103,13 @@ function SearchBar() {
               </div>
               <div className="col-md-2">
                 <br />
-                <button
+                <Link to={`/PropertyList`}
                   type="submit"
                   className="btn btn-primary btn-block"
                   disabled={isSubmitting}
                 >
                   Search
-                </button>
+                </Link>
               </div>
             </div>
           </Form>
