@@ -5,10 +5,11 @@ import { HiHomeModern } from "react-icons/hi2";
 import { MdApartment } from "react-icons/md";
 import { MdOutlineHouse } from "react-icons/md";
 import SearchBar from  '../SearchBar/SearchBar.jsx';
-
+import villaImg1 from "../../assets/Images/villaImg1.jpeg";
+import villaImg2 from "../../assets/Images/villaImg2.jpeg";
+import villaImg3 from "../../assets/Images/villaImg3.jpeg";
 export default function Home() {
-
-
+  
   return (
     <>
       <div className="home-bg">
@@ -101,7 +102,7 @@ export default function Home() {
                 <a href="/">
                   <div className="villa-card">
                     <img
-                      src="https://farmhousehub.in/image/fh168-england-home-168-on-rent/thumb_500x500.jpeg"
+                      src={villaImg1}
                       alt="img"
                     />
                     <span className="poji">weekend home</span>
@@ -142,7 +143,7 @@ export default function Home() {
               <div className="col-lg-4">
                 <a href="/">
                   <div className="villa-card">
-                    <img src="https://farmhousehub.in/image/fh168-england-home-168-on-rent/thumb_500x500.jpeg" alt="img" />
+                    <img src={villaImg2} alt="img" />
                     <div className="villa-card-body">
                       <div className="row">
                         <div className="col-lg-10">
@@ -180,7 +181,7 @@ export default function Home() {
               <div className="col-lg-4">
                 <a href="/">
                   <div className="villa-card">
-                    <img src="https://farmhousehub.in/image/fh168-england-home-168-on-rent/thumb_500x500.jpeg" alt="img" />
+                    <img src={villaImg3} alt="img" />
                     <div className="villa-card-body">
                       <div className="row">
                         <div className="col-lg-10">

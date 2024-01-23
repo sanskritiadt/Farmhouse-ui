@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { fetchSingleProperty } from '../../utils/api'
 import * as Yup from 'yup';
+import DatePicker from 'react-datepicker';
 
 export default function PricingForm() {
   const { id } = useParams();
@@ -49,39 +50,60 @@ export default function PricingForm() {
       });
   }
 
+  // const validationSchema = Yup.object().shape({
+  //   email: Yup.string()
+  //     .email('Invalid email address')
+  //     .required('Email is required'),
+  //   checkInDate: Yup.date()
+  //     .required('Check-in date is required.')
+  //     .test('checkInBeforeCheckOut', 'Check-in date must be before the check-out date',
+  //       function (checkInDate) {
+  //         // `this.parent` refers to the entire form values.
+  //         const { checkOutDate } = this.parent;
+  //         if (checkInDate && checkOutDate) {
+  //           return new Date(checkInDate) < new Date(checkOutDate);
+  //         }
+  //         return true; // If either date is missing, assume it's valid.
+  //       }),
+  //   checkOutDate: Yup.date()
+  //     .required('Check-out date is required.')
+  //     .test('checkInBeforeCheckOut', 'Check-out date must be after the check-in date',
+  //       function (checkOutDate) {
+  //         // `this.parent` refers to the entire form values.
+  //         const { checkInDate } = this.parent;
+  //         if (checkInDate && checkOutDate) {
+  //           return new Date(checkOutDate) > new Date(checkInDate);
+  //         }
+  //         return true; // If either date is missing, assume it's valid.
+  //       }),
+  //   guestNo: Yup.number()
+  //     .typeError('Number of Guests must be a number')
+  //     .positive('Number of Guests must be a positive number')
+  //     .required('Number of Guests is required'),
+  //   termsAndConditions: Yup.boolean().oneOf([true], 'You must agree to the terms and conditions'),
+  // });
+  
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email address')
       .required('Email is required'),
-    checkInDate: Yup.date()
-      .required('Check-in date is required.')
-      .test('checkInBeforeCheckOut', 'Check-in date must be before the check-out date',
-        function (checkInDate) {
-          // `this.parent` refers to the entire form values.
-          const { checkOutDate } = this.parent;
-          if (checkInDate && checkOutDate) {
-            return new Date(checkInDate) < new Date(checkOutDate);
-          }
-          return true; // If either date is missing, assume it's valid.
-        }),
-    checkOutDate: Yup.date()
-      .required('Check-out date is required.')
-      .test('checkInBeforeCheckOut', 'Check-out date must be after the check-in date',
-        function (checkOutDate) {
-          // `this.parent` refers to the entire form values.
-          const { checkInDate } = this.parent;
-          if (checkInDate && checkOutDate) {
-            return new Date(checkOutDate) > new Date(checkInDate);
-          }
-          return true; // If either date is missing, assume it's valid.
-        }),
+    checkinDate: Yup.date().required('Check-In Date is required'),
+    checkoutDate: Yup.date().required('Check-Out Date is required')
+      .when('checkinDate', (checkinDate, schema) => {
+        return schema.test('checkOutAfterCheckIn', 'Check-out date must be after the check-in date',
+          function (checkoutDate) {
+            if (checkinDate && checkoutDate) {
+              return new Date(checkoutDate) > new Date(checkinDate);
+            }
+            return true;
+          });
+      }),
     guestNo: Yup.number()
       .typeError('Number of Guests must be a number')
       .positive('Number of Guests must be a positive number')
       .required('Number of Guests is required'),
     termsAndConditions: Yup.boolean().oneOf([true], 'You must agree to the terms and conditions'),
   });
-
 
   return (
     <div className="productDetail-card col-lg-4 col-md-5 margin-top-25">
@@ -96,15 +118,15 @@ export default function PricingForm() {
       <Formik
         initialValues={{
           email: '',
-          checkInDate: '',
-          checkOutDate: '',
+          checkinDate: '',
+          checkoutDate: '',
           guestNo: '',
           termsAndConditions: false,
         }}
         validationSchema={validationSchema}
         onSubmit={submit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, setFieldValue, values }) => (
           <Form>
             <div className="with-forms margin-top-0">
               <div className="row with-forms">
@@ -114,7 +136,16 @@ export default function PricingForm() {
                       <label htmlFor="checkInDate" className="col-md-4 col-form-label">
                         Check-In:
                       </label>
-                      <Field type="date" name="checkInDate" className="form-control" min={currentDate} />
+                      <DatePicker
+                        className="form-control"
+                        selected={values.checkinDate}
+                        onChange={(date) => {
+                          setFieldValue('checkinDate', date);
+                          setFieldValue('checkoutDate', ''); // Reset checkoutDate when checkinDate changes
+                        }}
+                        dateFormat="yyyy-MM-dd"
+                        minDate={new Date()}
+                      />
                     </div>
                     <ErrorMessage name="checkInDate" component="div" className="error" />
                   </div>
@@ -125,7 +156,13 @@ export default function PricingForm() {
                       <label htmlFor="checkOutDate" className="col-md-4 col-form-label">
                         Check-Out:
                       </label>
-                      <Field type="date" name="checkOutDate" className="form-control" min={currentDate} />
+                      <DatePicker
+                        className="form-control"
+                        selected={values.checkoutDate}
+                        onChange={(date) => setFieldValue('checkoutDate', date)}
+                        dateFormat="yyyy-MM-dd"
+                        minDate={new Date(values.checkinDate)} // Disable dates before the selected check-in date
+                      />
                     </div>
                     <ErrorMessage name="checkOutDate" component="div" className="error" />
                   </div>
