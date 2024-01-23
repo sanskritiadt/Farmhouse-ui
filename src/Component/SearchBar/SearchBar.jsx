@@ -1,27 +1,87 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import DatePicker from 'react-datepicker';
 import * as Yup from 'yup';
 import './SearchBar.css';
+import { addDays } from 'date-fns';
 import { Link } from 'react-router-dom';
 
+
+// const validationSchema = Yup.object().shape({
+//   checkinDate: Yup.date().required('Check-In Date is required')
+//     .test('checkInBeforeCheckout', 'Check-in date must be before the check-out date',
+//       function (checkinDate) {
+//         const { checkoutDate } = this.parent;
+//         if (checkinDate && checkoutDate) {
+//           return new Date(checkinDate) < new Date(checkoutDate);
+//         }
+//         return true;
+//       }),
+//   checkoutDate: Yup.date().required('Check-Out Date is required')
+//     .test('checkInBeforeCheckout', 'Check-out date must be after the check-in date',
+//       function (checkoutDate) {
+//         const { checkinDate } = this.parent;
+//         if (checkinDate && checkoutDate) {
+//           return new Date(checkoutDate) > new Date(checkinDate);
+//         } return true;
+//       }),
+//   guestCount: Yup.number()
+//     .typeError('Number of Guests must be a number')
+//     .positive('Number of Guests must be a positive number')
+//     .required('Number of Guests is required'),
+// });
+
+// const validationSchema = Yup.object().shape({
+//   checkinDate: Yup.date().required('Check-In Date is required'),
+//   checkoutDate: Yup.date().required('Check-Out Date is required')
+//     .when('checkinDate', (checkinDate, schema) => {
+//       return schema.test('checkInBeforeCheckout', 'Check-out date must be after the check-in date',
+//         function (checkoutDate) {
+//           if (checkinDate && checkoutDate) {
+//             return new Date(checkoutDate) > new Date(checkinDate);
+//           }
+//           return true;
+//         });
+//     }),
+//   guestCount: Yup.number()
+//     .typeError('Number of Guests must be a number')
+//     .positive('Number of Guests must be a positive number')
+//     .required('Number of Guests is required'),
+// });
+
+// const validationSchema = Yup.object().shape({
+//   checkinDate: Yup.date().required('Check-In Date is required'),
+//   checkoutDate: Yup.date().required('Check-Out Date is required')
+//     .when('checkinDate', (checkinDate, schema) => {
+//       return schema.test('checkOutAfterCheckIn', 'Check-out date must be after the check-in date',
+//         function (checkoutDate) {
+//           if (checkinDate && checkoutDate) {
+//             return new Date(checkoutDate) > new Date(checkinDate);
+//           }
+//           return true;
+//         });
+//     }),
+//   guestCount: Yup.number()
+//     .typeError('Number of Guests must be a number')
+//     .positive('Number of Guests must be a positive number')
+//     .required('Number of Guests is required'),
+// });
 const validationSchema = Yup.object().shape({
-  checkinDate: Yup.date().required('Check-In Date is required')
-    .test('checkInBeforeCheckout', 'Check-in date must be before the check-out date',
-      function (checkinDate) {
-        const { checkoutDate } = this.parent;
-        if (checkinDate && checkoutDate) {
-          return new Date(checkinDate) < new Date(checkoutDate);
-        }
-        return true;
-      }),
+  checkinDate: Yup.date().required('Check-In Date is required'),
   checkoutDate: Yup.date().required('Check-Out Date is required')
-    .test('checkInBeforeCheckout', 'Check-out date must be after the check-in date',
-      function (checkoutDate) {
-        const { checkinDate } = this.parent;
-        if (checkinDate && checkoutDate) {
-          return new Date(checkoutDate) > new Date(checkinDate);
-        } return true;
-      }),
+    .when('checkinDate', (checkinDate, schema) => {
+      return schema.test('checkOutAfterCheckIn', 'Check-out date must be after the check-in date',
+        function (checkoutDate) {
+          if (checkinDate && checkoutDate) {
+            return new Date(checkoutDate) > new Date(checkinDate);
+          }
+          return true;
+        });
+    })
+    .test('is-after-checkin', 'Check-out date must be after check-in date', function (value) {
+      const { checkinDate } = this.parent;
+      return addDays(new Date(checkinDate), 1) <= new Date(value);
+    }),
   guestCount: Yup.number()
     .typeError('Number of Guests must be a number')
     .positive('Number of Guests must be a positive number')
@@ -29,9 +89,7 @@ const validationSchema = Yup.object().shape({
 });
 
 
-
 function SearchBar() {
-  const currentDate = new Date().toISOString().split('T')[0];
 
   return (
     <div className="card my-4 d-flex justify-content-end">
@@ -45,40 +103,42 @@ function SearchBar() {
         onSubmit={(values) => {
           // Handle form submission here
           console.log(values);
-        }}
-      >
-        {({ isSubmitting }) => (
+        }} >
+        {({ isSubmitting, setFieldValue, values  }) => (
           <Form className="card-body">
             <div className="row">
               <div className="col-md-2">
                 <label htmlFor="checkinDate" className="form-label">
                   Check-In Date
                 </label>
-                <Field
-                  type="date"
+                <DatePicker
                   className="form-control"
-                  id="checkinDate"
-                  name="checkinDate"
-                  min={currentDate}
+                  selected={values.checkinDate}
+                  onChange={(date) => {
+                    setFieldValue('checkinDate', date);
+                    setFieldValue('checkoutDate', ''); // Reset checkoutDate when checkinDate changes
+                  }}
+                  dateFormat="yyyy-MM-dd"
+                  minDate={new Date()}
                 />
-                <ErrorMessage name="checkinDate" component="div" className="error" />
+                <ErrorMessage name="checkinDate" className="error" />
               </div>
               <div className="col-md-2">
                 <label htmlFor="checkinTime" className="form-label">
                   Check-In Time
                 </label><br />
-                <label htmlFor="checkinTime" className="form-label mt-2">10:00 AM</label>
+                <label htmlFor="checkinTime" className="form-label mt-2 ml-4">10:00 AM</label>
               </div>
               <div className="col-md-2">
                 <label htmlFor="checkoutDate" className="form-label">
                   Check-Out Date
                 </label>
-                <Field
-                  type="date"
-                  className="form-control"
-                  id="checkoutDate"
-                  name="checkoutDate"
-                  min={currentDate}
+                <DatePicker
+                 className="form-control"
+                  selected={values.checkoutDate}
+                  onChange={(date) => setFieldValue('checkoutDate', date)}
+                  dateFormat="yyyy-MM-dd"
+                  minDate={new Date(values.checkinDate)} // Disable dates before the selected check-in date
                 />
                 <ErrorMessage name="checkoutDate" component="div" className="error" />
               </div>

@@ -21,7 +21,7 @@ const PropertyList = () => {
   return (
     <div className="card-list">
       {list.map((card) => (
-        <Link style={{ textDecoration: 'none' }} to={`/PropertyList/${card.propertyId}`} key={card.propertyId}>
+        <Link style={{ textDecoration: 'none' }} to={`/PropertyList/${card.id}`} key={card.id}>
           <PropertyCard key={card.propertyId} name={card.propertyName} address={card.address} price={card.price} image={card.img} />
         </Link>
       ))}

@@ -33,10 +33,6 @@ const SingleProperty = () => {
     }
     fetchData()
   }, [id]);
-
-
-
-
   return (
     <>
       <div className="container">

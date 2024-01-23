@@ -12,3 +12,6 @@
   
   /* Optional: If you want to change the border color for invalid fields, you can add more styling here */
   
+  .form-label-date {
+    width: 70%;
+  }
