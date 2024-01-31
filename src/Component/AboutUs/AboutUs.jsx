@@ -3,10 +3,10 @@ import React from 'react'
 function AboutUs() {
     return (
         <>
-            <div className="card my-5 col-xl-10 utf_listing_item-container">
+            <div className="card my-5 col-xl-10  mx-auto text-center">
                 <div  className="card-body">
                 <h2 className="justify-content-center"  style={{ color: '#323232' }}>About Farmhousehub</h2>
-                <p style={{ color: '#707070' }}>Today we are westernising, with every virtue of
+                <p  className="mt-5"style={{ color: '#707070' }}>Today we are westernising, with every virtue of
                     activities and life style being brought up we look onwards to social gatherings and parties.
                     Owning a farm house is not an easy ordeal, we at FarmhouseHub company look forward at
                     providing the same virtue, we look into our customers and users and ensure the very fact

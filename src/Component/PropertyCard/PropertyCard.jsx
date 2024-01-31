@@ -17,9 +17,6 @@ const PropertyCard = ({ name, address, price }) => {
                 </div>
             </div>
         </div>
-
-       
-
     );
 };
 
